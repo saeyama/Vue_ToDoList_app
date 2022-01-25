@@ -7,19 +7,22 @@
   <title>ToDoリスト</title>
 </head>
 <body>
-  <h1>ToDoリスト</h1>
-  <div id="app" v-cloak>
-    <ul>
-      <li v-for="(memo,index) in memos" :key="memo.index">
-        <span>{{ memo.body }}</span>
-        <button @click="deletItem(index)">削除</button>
-        <button @click="editItem(index)">編集</button>
-      </li>
-    </ul>
-    <form @submit.prevent="addItem">
-      <input type="text" v-model="item" v-on:keyup.enter="changeItems" ref="editor" class="form-control">
-      <button v-on:click="setItems" type="submit">{{changeButtonText}}</button>
-    </form>
+  <div id="wrapper">
+    <h1>ToDoリスト</h1>
+    <div id="app" v-cloak>
+      <form @submit.prevent="addItem">
+        <input type="text" v-model="item" v-on:keyup.enter="changeItems" ref="editor" class="form-control">
+        <button v-on:click="setItems" type="submit">{{changeButtonText}}</button>
+      </form>
+
+      <ul>
+        <li v-for="(memo,index) in memos" :key="memo.index">
+          <span id="memo_list">{{ memo.body }}</span>
+          <button  @click="deletItem(index)">削除</button>
+          <button  @click="editItem(index)">編集</button>
+        </li>
+      </ul>
+    </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <script type="text/javascript" src="memo_crud.js"></script>

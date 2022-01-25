@@ -7,7 +7,7 @@ let vm = new Vue({
   },
   computed: {
     changeButtonText() {
-      return this.editIndex === -1 ? '追加' : '編集完了'
+      return this.editIndex === -1 ? '追加' : '完了'
     }
   },
   watch: {
