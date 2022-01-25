@@ -10,15 +10,15 @@
   <h1>ToDoリスト</h1>
   <div id="app" v-cloak>
     <ul>
-      <li v-for="(memo, index) in memos" :key="memo.index">
-        <span>{{ index }}</span>
+      <li v-for="(memo,index) in memos" :key="memo.index">
         <span>{{ memo.body }}</span>
         <button @click="deletItem(index)">削除</button>
+        <button @click="editItem(index)">編集</button>
       </li>
     </ul>
     <form @submit.prevent="addItem">
-      <input type="text" v-model="item">
-      <input type="submit">
+      <input type="text" v-model="item" v-on:keyup.enter="changeItems" ref="editor" class="form-control">
+      <button v-on:click="setItems" type="submit">{{changeButtonText}}</button>
     </form>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
