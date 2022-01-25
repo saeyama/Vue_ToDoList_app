@@ -11,5 +11,3 @@ Vue.js 2系(CDN)
 `clone`もしくは`fork`でローカルに落とし、index.htmlファイルをブラウザで開くと使用可能です！
 
 ![todo_list_app](https://user-images.githubusercontent.com/64824195/150998378-a110aa4f-9dc0-47bc-878f-9b37b0370379.png)
-
-
