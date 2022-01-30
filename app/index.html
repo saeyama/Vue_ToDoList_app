@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>ToDoリスト</title>
 </head>
@@ -11,12 +10,12 @@
     <h1>ToDoリスト</h1>
     <div id="app" v-cloak>
       <form @submit.prevent="addItem">
-        <input type="text" v-model="item" v-on:keyup.enter="changeItems" ref="editor" class="form-control">
+        <input type="text" v-model="item" ref="editor" class="form-control">
         <button v-on:click="setItems" type="submit">{{changeButtonText}}</button>
       </form>
 
       <ul>
-        <li v-for="(memo,index) in memos" :key="memo.index">
+        <li v-for="(memo,index) in memos" :key="index">
           <span id="memo_list">{{ memo.body }}</span>
           <button  @click="deletItem(index)">削除</button>
           <button  @click="editItem(index)">編集</button>
