@@ -2,12 +2,12 @@ const vm = new Vue({
   el: '#app',
   data: {
     item: '',
-    editIndex: -1,
+    editId: null,
     memos: []
   },
   computed: {
     changeButtonText () {
-      return this.editIndex === -1 ? '追加' : '完了'
+      return this.editId === null ? '追加' : '完了'
     }
   },
   watch: {
@@ -24,30 +24,42 @@ const vm = new Vue({
   methods: {
     addItem () {
       if (!this.item) return
-      const item = { body: this.item }
+      const item = {
+        id: this.memos.length,
+        body: this.item
+      }
       this.memos.push(item)
       this.item = ''
     },
-    deletItem (index) {
-      this.memos.splice(index, 1)
+    deleteItem (targetId) {
+      this.memos.splice(targetId, 1)
+      for (let i = targetId; i < this.memos.length; i++) {
+        this.memos[i].id = i
+      }
     },
     setItems () {
       if (!this.item) return
-      if (this.editIndex === -1) {
-        const item = { body: this.item }
+      if (this.editId === null) {
+        const item = {
+          id: this.memos.length,
+          body: this.item
+        }
         this.memos.push(item)
       } else {
-        this.memos.splice(this.editIndex, 1, { body: this.item })
+        this.memos.splice(this.editId, 1, {
+          id: this.editId,
+          body: this.item
+        })
       }
       this.cancel()
     },
     cancel () {
       this.item = ''
-      this.editIndex = -1
+      this.editId = null
     },
-    editItem (index) {
-      this.editIndex = index
-      this.item = this.memos[index].body
+    editItem (targetId) {
+      this.editId = this.memos[targetId].id
+      this.item = this.memos[targetId].body
       this.$refs.editor.focus()
     }
   }

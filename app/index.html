@@ -11,14 +11,14 @@
     <div id="app" v-cloak>
       <form @submit.prevent="addItem">
         <input type="text" v-model="item" ref="editor" class="form-control">
-        <button v-on:click="setItems" type="submit">{{changeButtonText}}</button>
+        <button @click="setItems" type="submit">{{changeButtonText}}</button>
       </form>
 
       <ul>
-        <li v-for="(memo,index) in memos" :key="index">
+        <li v-for="memo in memos" :key="memo.id">
           <span id="memo_list">{{ memo.body }}</span>
-          <button  @click="deletItem(index)">削除</button>
-          <button  @click="editItem(index)">編集</button>
+          <button @click="deleteItem(memo.id)">削除</button>
+          <button @click="editItem(memo.id)">編集</button>
         </li>
       </ul>
     </div>
