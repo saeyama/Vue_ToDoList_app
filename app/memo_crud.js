@@ -12,14 +12,16 @@ const vm = new Vue({
   },
   watch: {
     memos: {
-      handler: function () {
+      handler () {
         localStorage.setItem('memos', JSON.stringify(this.memos))
       },
       deep: true
     }
   },
-  mounted: function () {
-    this.memos = JSON.parse(localStorage.getItem('memos')) || []
+  mounted () {
+    this.$nextTick(() => {
+      this.memos = JSON.parse(localStorage.getItem('memos')) || []
+    })
   },
   methods: {
     addItem () {
