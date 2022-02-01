@@ -25,29 +25,27 @@ const vm = new Vue({
     addItem () {
       if (!this.item) return
       const item = {
-        id: this.memos.length,
+        id: new Date().getTime().toString(),
         body: this.item
       }
       this.memos.push(item)
       this.item = ''
     },
     deleteItem (targetId) {
-      this.memos.splice(targetId, 1)
-      for (let i = targetId; i < this.memos.length; i++) {
-        this.memos[i].id = i
-      }
+      const deleteId = this.memos.findIndex(({ id }) => id === targetId)
+      this.memos.splice(deleteId, 1)
     },
     setItems () {
       if (!this.item) return
       if (this.editId === null) {
         const item = {
-          id: this.memos.length,
+          id: new Date().getTime().toString(),
           body: this.item
         }
         this.memos.push(item)
       } else {
         this.memos.splice(this.editId, 1, {
-          id: this.editId,
+          id: this.memos[this.editId].id,
           body: this.item
         })
       }
@@ -58,8 +56,8 @@ const vm = new Vue({
       this.editId = null
     },
     editItem (targetId) {
-      this.editId = this.memos[targetId].id
-      this.item = this.memos[targetId].body
+      this.editId = this.memos.findIndex(({ id }) => id === targetId)
+      this.item = this.memos[this.editId].body
       this.$refs.editor.focus()
     }
   }
